@@ -9,5 +9,7 @@ As a person, who hates to get up when it's still dark, I decided to experiment w
 3) The script scrapes <a href=http://timeanddate.com>timeanddate.com</a> for necessary information
 4) The script plots sunrise times across year 2017, calculates how many days pro year the user would get up after sunrise in each city and returns the best city
 
-<b>External data:</b> cities_base.txt, countries_base.txt<br/>
+<b>External data:</b><a href="https://drive.google.com/open?id=1v4dA0NqJqCrImaRL3QnViqN56aq46OGq"> cities_base.txt, countries_base.txt (Google Drive) </a><br/>
 <b>Libraries:</b> XML, httr, chron
+
+![image](/sunrisePlot.png?raw=true "Title")
