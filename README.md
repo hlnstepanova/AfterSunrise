@@ -1,7 +1,7 @@
 # AfterSunrise
 <i>Scraping and plotting sunrise times in R.</i>
 
-As a person, who hates to get up when it's still dark, I decided to experiment writing an R script to see, how many days pro year I can get up after sunrise depending on what city I choose to live in.
+If you don't like to get up when it's still dark, use this script to see, how many days pro year you can get up after sunrise depending on what city you choose to live in.
 
 <b>The script works as follows:</b>
 1) User inputs his usual get up time
