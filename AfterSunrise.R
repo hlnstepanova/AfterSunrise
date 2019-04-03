@@ -4,11 +4,11 @@ library(chron)
 
 
 # upload the cities and countries databases
-cities_base <- read.csv("C:/Users/analitik2/Documents/R/projects/after_sunrise/cities_base.txt",
+cities_base <- read.csv("sunrise/cities_base.txt",
                       sep = "\t",quote = "",
                       header = TRUE,
                       stringsAsFactors = FALSE)
-countries_base <- read.csv("C:/Users/analitik2/Documents/R/projects/after_sunrise/countries_base.txt",
+countries_base <- read.csv("sunrise/countries_base.txt",
                          sep = "\t", quote = "", header = TRUE,
                          stringsAsFactors = FALSE)
 
@@ -136,7 +136,8 @@ for (r in 1:length(country)){
     # add months to the path 
     for (i in 1:12){
         url_part2 <- paste(url_part1, "?month=", i , 
-                           "&year=2017", sep="")
+                           "&year=2018", sep="")
+        print(url_part2)
         sun_data <- GET(url_part2)
         stop_for_status(sun_data)
         doc <- content(sun_data)
@@ -159,23 +160,23 @@ for (r in 1:length(country)){
                               nrow(perftable)) # add country name
         perftable[,16] <- rep(cities_list[r], 
                               nrow(perftable)) # add city name
-        
-        
         monthly <- rbind(monthly,perftable) # grow table
     }
-    
-    
 
 }
 
+str(monthly)
+
 # delete rows with notes
-monthly <- monthly[which(monthly[,1] != "Note: hours shift because clocks change backward 1 hour. (See the note below this table for details)"), ]
-monthly <- monthly[which(monthly[,1] != "Note: hours shift because clocks change forward 1 hour. (See the note below this table for details)"), ]
+monthly <- monthly[which(monthly[,1] != 
+                            "Note: hours shift because clocks change forward 1 hour. (See the note below this table for details)"),]
+monthly <- monthly[which(monthly[,1] != 
+                            "Note: hours shift because clocks change backward 1 hour. (See the note below this table for details)"),]
 
 # add dates
-
 monthly[,17] <- paste(monthly[,1], ".", monthly[,14], 
-                      ".2017", sep = "")
+                      ".2018", sep = "")
+
 
 
 # extracting only sunrise times
@@ -191,8 +192,7 @@ for (i in 1:length(cities_list)){
 colnames(total_sunrise) <- c("dates", cities_list)
 
 # convert to characters
-total_sunrise[,] <- data.frame(lapply(total_sunrise[,], as.character), 
-                               stringsAsFactors=FALSE) 
+total_sunrise[,] <- data.frame(lapply(total_sunrise[,], as.character), stringsAsFactors=FALSE)
 
 # cut the string with sunrise times
 total_sunrise[,-1] <- sapply(total_sunrise[,-1], substr, 1, 5) 
@@ -201,18 +201,16 @@ total_sunrise[,-1] <- sapply(total_sunrise[,-1], substr, 1, 5)
 total_sunrise[,1] <- as.Date(total_sunrise[,1], "%d.%m.%Y") 
 
 # add seconds to time
-total_sunrise[,-1] <- lapply(total_sunrise[,-1], 
-                             function(x) paste(x, ":00", sep="")) 
+total_sunrise[,-1] <- lapply(total_sunrise[,-1], function(x) paste(x, ":00", sep="")) 
 
 # convert to time type
-total_sunrise[,-1] <- lapply(total_sunrise[,-1], 
-                             function(x) as.POSIXct(x, format = "%H:%M:%S")) 
+total_sunrise[,-1] <- lapply(total_sunrise[,-1], function(x) as.POSIXct(x, format = "%H:%M:%S"))
 
 
 # plotting sunrise time along the year in the first city
 plot(x = total_sunrise[,1], y = total_sunrise[,2], 
      xlab="Date", ylab="Time", 
-     main="Sunrise times in chosen cities", 
+     main="Sunrise times in different cities", 
      col=2, type="l")
 
 # adding plots for other cities (if any)
