@@ -4,11 +4,11 @@ library(chron)
 
 
 # upload the cities and countries databases
-cities_base <- read.csv("after_sunrise/cities_base.txt",
+cities_base <- read.csv("C:/Users/analitik2/Documents/R/projects/after_sunrise/cities_base.txt",
                       sep = "\t",quote = "",
                       header = TRUE,
                       stringsAsFactors = FALSE)
-countries_base <- read.csv("after_sunrise/countries_base.txt",
+countries_base <- read.csv("C:/Users/analitik2/Documents/R/projects/after_sunrise/countries_base.txt",
                          sep = "\t", quote = "", header = TRUE,
                          stringsAsFactors = FALSE)
 
@@ -212,7 +212,7 @@ total_sunrise[,-1] <- lapply(total_sunrise[,-1],
 # plotting sunrise time along the year in the first city
 plot(x = total_sunrise[,1], y = total_sunrise[,2], 
      xlab="Date", ylab="Time", 
-     main="Sunrise times in different cities", 
+     main="Sunrise times in chosen cities", 
      col=2, type="l")
 
 # adding plots for other cities (if any)
