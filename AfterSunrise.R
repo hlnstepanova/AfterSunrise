@@ -142,9 +142,20 @@ for (r in 1:length(country)){
         stop_for_status(sun_data)
         doc <- content(sun_data)
         sun_data <- doc['//table']
-        perftable <- readHTMLTable(sun_data[[1]], 
-                                   stringsAsFactors = F)
+        perftable <- readHTMLTable(sun_data[[1]], stringsAsFactors = F)
+        if (i==1){used_colnames <- colnames(perftable)}
+        str(perftable)
+        if(ncol(perftable) == 11){
+          perftable1 <- perftable[,1:6]
+          perftable1[,7] <- rep("-",nrow(perftable1))
+          perftable1[,8] <-perftable[,7]
+          perftable1[,9] <- rep("-",nrow(perftable1))
+          perftable1[,10:13]<-perftable[,8:11]
+          perftable<-perftable1
+          colnames(perftable)<-used_colnames
+        }
         ### cleaning data
+        if(ncol(perftable) == 12){
         rest_of_night <- which(perftable[,6] == "Rest of night")
         len_rest <- length(rest_of_night)
         if (len_rest > 0) {
@@ -152,6 +163,8 @@ for (r in 1:length(country)){
                                                len_rest)
             perftable[rest_of_night,] <- perftable[rest_of_night, 
                                                    c(1:6, 13, 7:12)] 
+            colnames(perftable)=used_colnames
+        }
         }
 
         perftable[,14] <- as.integer(rep(i, 
