@@ -12,4 +12,4 @@ If you don't like to get up when it's still dark, use this script to see, how ma
 <b>External data:</b><a href="https://drive.google.com/open?id=1v4dA0NqJqCrImaRL3QnViqN56aq46OGq"> cities_base.txt, countries_base.txt (Google Drive) </a><br/>
 <b>Libraries:</b> XML, httr, chron
 
-![image](/sunrisePlot.png?raw=true "Plot example")
+![image](/plot.png?raw=true "Plot example")
